@@ -48,16 +48,11 @@ class Graph_pq {
             Node v = adj_list.get(u).get(i); 
    
             //  proceed only if current node is not in 'visited'
-            if (!visited.contains(v.node)) { 
+            if (!visited.contains(v.node) & newDistance < dist[v.node]) { 
                 edgeDistance = v.cost; 
                 newDistance = dist[u] + edgeDistance; 
-   
-                // compare distances 
-                if (newDistance < dist[v.node]){
-                    dist[v.node] = newDistance;
-                    pi[v.node] = u;
-                }
-                    
+                dist[v.node] = newDistance;
+                pi[v.node] = u;        
    
                 // Add the current vertex to the PriorityQueue 
                 pqueue.add(new Node(v.node, dist[v.node])); 
