@@ -25,7 +25,7 @@ public class Main {
 
     //create connection for first row of matrix
     int totalEdges = 0;
-    int edgesToInitialize = (int)(edges*40.0/100.0);
+    int edgesToInitialize = (int)(size*40.0/100.0);
     for(int u=0; u<edgesToInitialize; u++){
       int random = rand.nextInt(size-1)+1;
       int weightInitial = rand.nextInt(upperbound-1)+1;
@@ -60,7 +60,7 @@ public class Main {
       int j = rand.nextInt(size);
       int weight = ran.nextInt(upperbound-1)+1;
       
-      if(graph[x][j]==0){
+      if(graph[x][j]==0 && x!=j){
         totalEdges++;
         graph[x][j] = weight;
       }

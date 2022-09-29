@@ -19,7 +19,7 @@ class entryGate{
     ArrayList<Integer> h = new ArrayList<Integer>(5);
    
     //create graph
-    int edgesToInitialize = (int)(edges*40.0/100.0);
+    int edgesToInitialize = (int)(size*40.0/100.0);
     for(int u=0; u<edgesToInitialize; u++){
       int random = rand.nextInt(size-1)+1;
       int weightInitial = rand.nextInt(upperbound-1)+1;
