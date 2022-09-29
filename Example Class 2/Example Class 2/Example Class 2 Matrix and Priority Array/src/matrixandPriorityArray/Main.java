@@ -23,7 +23,7 @@ public class Main {
 		System.out.println("");
         Random ran = new Random();
 		ArrayList<Integer> h = new ArrayList<Integer>(5);
-		HashSet<Integer> hashSet = new HashSet<Integer>();
+		//HashSet<Integer> hashSet = new HashSet<Integer>();
 
 		//create graph
 		int totalEdges = 0;
@@ -55,12 +55,7 @@ public class Main {
 
 		int remainingEdges = edges - edgesToInitialize - additionalEdge + 1;
 
-		for(int i=0;i<size;i++) {
-        	for(int j=0;j<size;j++) {
-        		System.out.print(graph[i][j]+" ");
-        	}
-        	System.out.println();
-        }
+		
 
         for(int i=0;i<remainingEdges-1;i++) {
 			int x = rand.nextInt(size);
@@ -85,7 +80,7 @@ public class Main {
 
 
 	
-		System.out.println("AdditionalEdge: "+additionalEdge);
+		//System.out.println("AdditionalEdge: "+additionalEdge);
         System.out.println("The weighted value for each node: ");
         for(int i=0;i<size;i++) {
         	for(int j=0;j<size;j++) {
