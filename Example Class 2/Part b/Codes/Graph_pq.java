@@ -8,7 +8,7 @@ class Graph_pq {
     //class constructor
     public Graph_pq(int V) { 
         this.V = V; 
-        dist = new int[V]; 
+        dist = new int[V];
         pi = new int[V];       //add pi[] to store predecessor
         visited = new HashSet<Integer>(); 
         pqueue = new PriorityQueue<Node>(V, new Node()); 
