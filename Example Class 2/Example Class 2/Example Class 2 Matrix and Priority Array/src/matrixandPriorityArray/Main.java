@@ -63,7 +63,7 @@ public class Main {
 			int weight = ran.nextInt(upperbound-1)+1;
 			
 			//check if the edge is already in the graph by using the hashset
-			System.out.println(graph[x][j]);
+			//System.out.println(graph[x][j]);
 			if(graph[x][j]==0){
 				totalEdges++;
 				graph[x][j] = weight;
