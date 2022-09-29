@@ -28,6 +28,7 @@ class Graph_pq {
         // Distance to the source from itself is 0 
         dist[src_vertex] = 0; 
 
+        //keep looping as long as the answer slot is not filled up
         while (visited.size() != V) { 
  
             // u is removed from PriorityQueue and has min distance  
@@ -41,17 +42,17 @@ class Graph_pq {
     
   // this methods processes all neighbours of the just visited node 
     private void graph_adjacentNodes(int u)   { 
-        int edgeDistance = -1; 
         int newDistance = -1; 
    
         // process all neighbouring nodes of u 
+        //adj_list.get(u).size() stores number of neighbouring nodes
         for (int i = 0; i < adj_list.get(u).size(); i++) { 
             Node v = adj_list.get(u).get(i); 
    
             //  proceed only if current node is not in 'visited'
-            if (!visited.contains(v.node) & newDistance < dist[v.node]) { 
-                edgeDistance = v.cost; 
-                newDistance = dist[u] + edgeDistance; 
+            // dist[v.node] if has not been dealt with yet is 2147483647
+            if (!visited.contains(v.node) & v.cost < dist[v.node]) { 
+                newDistance = dist[u] + v.cost; 
                 dist[v.node] = newDistance;
                 pi[v.node] = u;        
    
