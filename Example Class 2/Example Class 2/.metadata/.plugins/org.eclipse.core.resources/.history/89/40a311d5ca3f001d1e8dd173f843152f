@@ -17,30 +17,27 @@ public class Main {
 		Random rand = new Random();
 		int upperbound = 10;
 		int count=0;
-		
+		int Lcount=0;
+		int Pcount=0;
+		int Rcount=0;
 		
         int graph[][] = new int[size][size]; 
        
         System.out.println("");
         Random ran = new Random();
         ArrayList<Integer> h = new ArrayList<Integer>(5);
-        //HashSet<Integer> hashSet = new HashSet<Integer>();
+        HashSet<Integer> hashSet = new HashSet<Integer>();
 
         //create graph
         int totalEdges = 0;
-        int edgesToInitialize = (int)(edges*40.0/100.0);
+        int edgesToInitialize = (int) edges/2;
         //initialize first row with 40% of the edges
         for(int u=0; u<edgesToInitialize; u++){
         int random = rand.nextInt(size-1)+1;
         int weightInitial = rand.nextInt(upperbound-1)+1;
-        if(!h.contains(random)) {
         graph[0][random]= weightInitial;
         totalEdges++;
         h.add(random);
-        }
-        else {
-        	u--;
-        }
         }
 
         int additionalEdge = 0;
@@ -57,37 +54,44 @@ public class Main {
 
         int remainingEdges = edges - edgesToInitialize - additionalEdge + 1;
 
-        /*for(int i=0;i<size;i++) {
-        for(int j=0;j<size;j++) {
-        System.out.print(graph[i][j]+" ");
-        }
-        System.out.println();
-        }*/
-
-        for(int i=0;i<remainingEdges-1;i++) {
-        int x = rand.nextInt(size);
-        int j = rand.nextInt(size);
-        int weight = ran.nextInt(upperbound-1)+1;
-        //check if the edge is already in the graph by using the hashset
-        //System.out.println(graph[x][j]);
-        if(graph[x][j]==0){
-        totalEdges++;
-        graph[x][j] = weight;}
-        else{
-        i--;
-        }
-        }
-
-        System.out.println("Total edges: "+totalEdges);
-
-        System.out.println("AdditionalEdge: "+additionalEdge);
-        System.out.println("The weighted value for each node: ");
         for(int i=0;i<size;i++) {
         for(int j=0;j<size;j++) {
-        System.out.print(graph[i][j]+" ");
-        }
-        System.out.println();
-        }
+            System.out.print(graph[i][j]+" ");
+                  }
+                  System.out.println();
+                }
+
+                for(int i=0;i<remainingEdges-1;i++) {
+              int x = rand.nextInt(size);
+              int j = rand.nextInt(size);
+              int weight = ran.nextInt(upperbound-1)+1;
+              
+              //check if the edge is already in the graph by using the hashset
+              System.out.println(graph[x][j]);
+              if(graph[x][j]==0){
+                totalEdges++;
+                graph[x][j] = weight;
+                
+              }
+              else{
+                i--;
+              }
+              
+            }
+
+          
+            System.out.println("Total edges: "+totalEdges);
+
+
+          
+            System.out.println("AdditionalEdge: "+additionalEdge);
+                System.out.println("The weighted value for each node: ");
+                for(int i=0;i<size;i++) {
+                  for(int j=0;j<size;j++) {
+                    System.out.print(graph[i][j]+" ");
+                  }
+                  System.out.println();
+                }
 		/*for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 				if (i == j) {
@@ -108,8 +112,8 @@ public class Main {
         		System.out.print(graph[i][j]+" ");
         	}
         	System.out.println();
-        }*/
+        }
         Array_Shortest_Path g = new Array_Shortest_Path(); 
-        g.algo_dijkstra(graph, 0); 
+        g.algo_dijkstra(graph, 0); */
     } 
 }
