@@ -16,15 +16,14 @@ public class Main {
 		edges= scan.nextInt();
 		Random rand = new Random();
 		int upperbound = 10;
-		int count=0;
+		
 		
 		
         int graph[][] = new int[size][size];
 		System.out.println("");
         Random ran = new Random();
 		ArrayList<Integer> h = new ArrayList<Integer>(5);
-		//HashSet<Integer> hashSet = new HashSet<Integer>();
-
+		
 		//create graph
 		int totalEdges = 0;
 		int edgesToInitialize = (int)(edges*40.0/100.0);
@@ -33,9 +32,14 @@ public class Main {
 		for(int u=0; u<edgesToInitialize; u++){
 			int random = rand.nextInt(size-1)+1;
 			int weightInitial = rand.nextInt(upperbound-1)+1;
-			graph[0][random]= weightInitial;
-			totalEdges++;
-			h.add(random);
+			if(!h.contains(random)){
+				graph[0][random]= weightInitial;
+				totalEdges++;
+				h.add(random);
+			}
+			else{
+				u--;
+			}
 		}
 	
 		
@@ -53,6 +57,7 @@ public class Main {
 			}
 		}
 
+		System.out.println("additioal nodes" + additionalEdge);
 		int remainingEdges = edges - edgesToInitialize - additionalEdge + 1;
 
 		
@@ -63,7 +68,7 @@ public class Main {
 			int weight = ran.nextInt(upperbound-1)+1;
 			
 			//check if the edge is already in the graph by using the hashset
-			//System.out.println(graph[x][j]);
+			System.out.println(graph[x][j]);
 			if(graph[x][j]==0){
 				totalEdges++;
 				graph[x][j] = weight;
