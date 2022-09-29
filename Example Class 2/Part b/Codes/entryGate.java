@@ -52,7 +52,7 @@ class entryGate{
       int weight = rand.nextInt(upperbound-1)+1;
       
       //check if the edge is already in the graph
-      if(graph[x][j]==0){
+      if(graph[x][j]==0 && x=j){
         graph[x][j] = weight;
       }
       else{
