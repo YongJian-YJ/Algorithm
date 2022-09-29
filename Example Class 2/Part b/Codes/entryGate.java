@@ -1,22 +1,114 @@
 import java.util.*; 
-import java.util.Random;
-class entryGate{
-    public static void main(String arg[])   { 
-        //get number of vertices and edges
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Please enter the number of vertices");
-        int noOfVertices = sc.nextInt();
-        System.out.println("Please enter the number of edges");
-        int noOfEdges = sc.nextInt();
-        if(noOfEdges > noOfVertices*(noOfVertices-1)){
-            System.out.println("Too many edges for this number of vertices; formula: N(N-1)");
-            return;
-        }
 
-        int V = noOfVertices; 
+class entryGate{
+    static int size;
+    static int edges;
+    public static void main(String arg[])   { 
+        Scanner sc = new Scanner(System.in);
+
+        //code here
+    System.out.println("Please enter the number of vertices: ");
+    Scanner scan = new Scanner(System.in);
+    size = scan.nextInt();
+    System.out.println("Please enter the number of edges: ");
+    edges= scan.nextInt();
+    Random rand = new Random();
+    int upperbound = 10;
+    int count=0;
+    
+    
+    int graph[][] = new int[size][size];
+    System.out.println("");
+    Random ran = new Random();
+    ArrayList<Integer> h = new ArrayList<Integer>(5);
+    //HashSet<Integer> hashSet = new HashSet<Integer>();
+
+    //create graph
+    int totalEdges = 0;
+    int edgesToInitialize = (int)(edges*40.0/100.0);
+    //(int) edges/2;
+    //initialize first row with 40% of the edges
+    for(int u=0; u<edgesToInitialize; u++){
+      int random = rand.nextInt(size-1)+1;
+      int weightInitial = rand.nextInt(upperbound-1)+1;
+      if(!h.contains(random)){
+        graph[0][random]= weightInitial;
+        totalEdges++;
+        h.add(random);
+      }
+      else{
+        u--;
+      }
+    }
+  
+    
+
+    
+    int additionalEdge = 0;
+
+    for(int x=0; x<size; x++){
+      if(graph[0][x]==0){
+        //if it is 0, establish a connection
+        additionalEdge++;
+        totalEdges++;
+        int random_vertice = rand.nextInt(h.size()-1)+1;    
+        graph[h.get(random_vertice-1)][x] = rand.nextInt(upperbound-1)+1;
+      }
+    }
+
+    int remainingEdges = edges - edgesToInitialize - additionalEdge + 1;
+
+    
+
+        for(int i=0;i<remainingEdges-1;i++) {
+      int x = rand.nextInt(size);
+      int j = rand.nextInt(size);
+      int weight = ran.nextInt(upperbound-1)+1;
+      
+      //check if the edge is already in the graph by using the hashset
+      //System.out.println(graph[x][j]);
+      if(graph[x][j]==0){
+        totalEdges++;
+        graph[x][j] = weight;
+        
+      }
+      else{
+        i--;
+      }
+      
+    }
+        //end code here
+        //graph is generated
+        for(int i=0;i<size;i++) {
+            for(int j=0;j<size;j++) {
+              System.out.print(graph[i][j]+" ");
+            }
+            System.out.println();
+          }
+        //store graph into dictionary(array)
+        int[] array = new int[size*4]; 
+        int sizeOfArray=-1;
+        for(int p=0; p<size; p++){
+          for(int q=0; q<size; q++){
+            if(graph[p][q]!=0){
+              array[++sizeOfArray] = p;
+              array[++sizeOfArray] = q;
+            }
+          }
+        }
+        sizeOfArray = sizeOfArray+1;
+      
+        
+
+
+
+
+
+
+
+        int V = size; 
         int source = 0;
-        Random rand = new Random();
-       
+
 
         // adjacency list representation of graph
         List<List<Node> > adj_list = new ArrayList<List<Node> >(); 
@@ -27,46 +119,25 @@ class entryGate{
             List<Node> item = new ArrayList<Node>(); 
             adj_list.add(item); 
         } 
- 
-        // Add a set to check if there is any repeated edges
-        Set<String> hash_Set = new HashSet<String>();
-
-
-        //initialize the graph(Adjacency list)
-        for(int i=0; i<noOfVertices; i++){
-            int randomVertices = rand.nextInt(noOfVertices);
-            int randomWeight = rand.nextInt(10);
-            if(i!=randomVertices){
-                adj_list.get(i).add(new Node(randomVertices, randomWeight));
-                hash_Set.add(i+" "+randomVertices);
-                System.out.printf("adj_list.get(%d).add(new Node(%d, %d));", i, randomVertices, randomWeight);
-                System.out.println("");
-                //adj_list.get(0).add(new Node(1, 5)); 
-            }
-            else{
-                i--;    //if it is the same vertex, retry so that we can have the no. of edges we want
-            }
-        }
-
-        //add additional edges - noOfEdges - noOfVertices as I have already added some of the required edges
-        int remaining = noOfEdges - noOfVertices;
-        while(remaining>0){
-            int i = rand.nextInt(noOfVertices);
-            int j = rand.nextInt(noOfVertices);
-            if(hash_Set.contains(i+" "+j) || i==j){
-                adj_list.get(i).add(new Node(j, rand.nextInt(noOfVertices)));
-                remaining--;
-            }
-            else{
-                continue;
-            }
-        }
-        adj_list.get(0).add(new Node(4, 3));
-        adj_list.get(1).add(new Node(0, 4));
-        adj_list.get(2).add(new Node(1, 1));
-        adj_list.get(3).add(new Node(4, 5));
-        adj_list.get(4).add(new Node(1, 1));
         
+        int oldSize = sizeOfArray;
+        // Input graph edges 
+        sizeOfArray = -1;
+        while(true){
+          int first = array[++sizeOfArray];
+          int second = array[++sizeOfArray];
+          int randtmp = rand.nextInt(20-1)+1;
+          System.out.printf("adj_list.get(%d).add(new Node(%d,%d)", first, second, randtmp);
+          System.out.println("");
+            adj_list.get(first).add(new Node(second, randtmp)); 
+            if(sizeOfArray>=oldSize-1){
+                break;
+            }
+        }
+            
+        
+
+        source = 0;
         // call Dijkstra's algo method  
         Graph_pq dpq = new Graph_pq(V); 
         dpq.algo_dijkstra(adj_list, source); 
@@ -76,18 +147,5 @@ class entryGate{
         System.out.println("Node\t\t" + "Predecessor\t\t" + "Distance");
         for (int i = 0; i < dpq.dist.length; i++) 
             System.out.println(" " + i + " \t\t     "  + dpq.pi[i]+ " \t\t\t   "  + dpq.dist[i]);
-
-
-
-
-            /* 
-         // Input graph edges 
-        adj_list.get(0).add(new Node(4, 3));
-        adj_list.get(1).add(new Node(0, 4));
-        adj_list.get(2).add(new Node(1, 1));
-        adj_list.get(3).add(new Node(4, 5));
-        adj_list.get(4).add(new Node(1, 1));
-        */
     } 
 } 
-   
