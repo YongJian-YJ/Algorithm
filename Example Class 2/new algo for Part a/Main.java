@@ -65,18 +65,14 @@ public class Main {
     }
 
     //create random connection until edges is 0
-    while(true){
-      if(edges<=0) break;
-      Integer[] arrayNumbers = nodeAlrConnectedtoSource.toArray(new Integer[nodeAlrConnectedtoSource.size()]);
-      int left_value = arrayNumbers[rand.nextInt(nodeAlrConnectedtoSource.size())];
+    while(edges>0){
+      int left_value = rand.nextInt(size-1)+1;
       int right_value = rand.nextInt(size-1)+1;
+
       if(graph[left_value][right_value]==0 || left_value!=right_value){
         graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
-        nodeAlrConnectedtoSource.add(right_value);
         edges--;
       }   
-      //termination case
-      if(edges<=0) break;
     }
     
 
