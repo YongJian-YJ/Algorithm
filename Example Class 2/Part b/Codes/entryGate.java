@@ -4,7 +4,8 @@ class entryGate{
     static int size;
     static int edges;
     public static void main(String arg[])   { 
-        Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
+    
 
     //Generate Matrix from line 9 to line 62
     System.out.println("Please enter the number of vertices: ");
@@ -12,52 +13,76 @@ class entryGate{
     size = scan.nextInt();
     System.out.println("Please enter the number of edges: ");
     edges= scan.nextInt();
-
     Random rand = new Random();
-    int upperbound = 10;    
+    int upperbound = 10;
+    
+    
     int graph[][] = new int[size][size];
+    System.out.println("");
+    int[] array = new int[size*(size*(size+1))]; 
+    int sizeOfArray=-1;
+
     ArrayList<Integer> h = new ArrayList<Integer>(5);
-   
-    //create graph
+    Set<Integer> nodeAlrConnectedtoSource = new HashSet<Integer> (); 
+    Set<Integer> nodeNotConenctedtoSource = new HashSet<Integer> (size); 
+
+    for(int ui=0; ui<size; ui++){
+      nodeNotConenctedtoSource.add(ui);
+    }
+  
+    //from line 33 to 77
+    //create connection for first row of matrix
     int edgesToInitialize = (int)(size*40.0/100.0);
     for(int u=0; u<edgesToInitialize; u++){
       int random = rand.nextInt(size-1)+1;
       int weightInitial = rand.nextInt(upperbound-1)+1;
       if(!h.contains(random)){
         graph[0][random]= weightInitial;
+        array[++sizeOfArray] = 0;
+        array[++sizeOfArray] = random;
         h.add(random);
+        nodeAlrConnectedtoSource.add(random);
+        nodeNotConenctedtoSource.remove(random);
+        edges--;
       }
       else{
         u--;
       }
     }
-
-    int additionalEdge = 0;
-
-    for(int x=0; x<size; x++){
-      if(graph[0][x]==0){
-        //if it is 0, establish a connection
-        additionalEdge++;
-        int random_vertice = rand.nextInt(h.size()-1)+1;    
-        graph[h.get(random_vertice-1)][x] = rand.nextInt(upperbound-1)+1;
+    
+    //create connection for each vertices that has not been connected to source, without needing to connect directly
+    while(true){
+      Integer[] arrayNumbers = nodeAlrConnectedtoSource.toArray(new Integer[nodeAlrConnectedtoSource.size()]);
+      Integer[] arrayNumbers2 = nodeNotConenctedtoSource.toArray(new Integer[nodeNotConenctedtoSource.size()]);
+      int left_value = arrayNumbers[rand.nextInt(nodeAlrConnectedtoSource.size())];
+      int right_value = arrayNumbers2[rand.nextInt(nodeNotConenctedtoSource.size())];
+      if(graph[left_value][right_value]==0 || left_value!=right_value){
+        graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
+        array[++sizeOfArray] = left_value;
+        array[++sizeOfArray] = right_value;
+        nodeAlrConnectedtoSource.add(right_value);
+        edges--;
+        nodeNotConenctedtoSource.remove(right_value);
       }
+      //termination case
+      if(edges<=0 || nodeNotConenctedtoSource.size()==0) break;
     }
 
-    int remainingEdges = edges - edgesToInitialize - additionalEdge + 1;
-
-      //create connection for remaining no. of edges
-      for(int i=0;i<remainingEdges-1;i++) {
-      int x = rand.nextInt(size);
-      int j = rand.nextInt(size);
-      int weight = rand.nextInt(upperbound-1)+1;
-      
-      //check if the edge is already in the graph
-      if(graph[x][j]==0 && x=j){
-        graph[x][j] = weight;
-      }
-      else{
-        i--;
-      }
+    //create random connection until edges is 0
+    while(true){
+      if(edges<=0) break;
+      Integer[] arrayNumbers = nodeAlrConnectedtoSource.toArray(new Integer[nodeAlrConnectedtoSource.size()]);
+      int left_value = arrayNumbers[rand.nextInt(nodeAlrConnectedtoSource.size())];
+      int right_value = rand.nextInt(size-1)+1;
+      if(graph[left_value][right_value]==0 || left_value!=right_value){
+        graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
+        array[++sizeOfArray] = left_value;
+        array[++sizeOfArray] = right_value;
+        nodeAlrConnectedtoSource.add(right_value);
+        edges--;
+      }   
+      //termination case
+      if(edges<=0) break;
     }
         //end code here - matrix is generated
 
@@ -69,17 +94,7 @@ class entryGate{
             System.out.println();
           }
 
-        //store the matrix into (array)
-        int[] array = new int[size*4]; 
-        int sizeOfArray=-1;
-        for(int p=0; p<size; p++){
-          for(int q=0; q<size; q++){
-            if(graph[p][q]!=0){
-              array[++sizeOfArray] = p;
-              array[++sizeOfArray] = q;
-            }
-          }
-        }
+       
         sizeOfArray = sizeOfArray+1;
 
         int V = size; 
