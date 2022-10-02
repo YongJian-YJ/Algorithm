@@ -23,16 +23,16 @@ class entryGate{
     int sizeOfArray=-1;
 
     ArrayList<Integer> h = new ArrayList<Integer>(5);
-    Set<Integer> nodeAlrConnectedtoSource = new HashSet<Integer> (); 
-    Set<Integer> nodeNotConenctedtoSource = new HashSet<Integer> (size); 
+    ArrayList<Integer> nodeAlrConnectedtoSource = new ArrayList<Integer> (); 
+    ArrayList<Integer> nodeNotConenctedtoSource = new ArrayList<Integer> (); 
 
     for(int ui=0; ui<size; ui++){
       nodeNotConenctedtoSource.add(ui);
     }
   
     //from line 33 to 77
-    //create connection for first row of matrix
-    int edgesToInitialize = (int)(size*40.0/100.0);
+   //create connection for first row of matrix - worst case is having only 1 edge connected directly to source
+    int edgesToInitialize = 1;
     for(int u=0; u<edgesToInitialize; u++){
       int random = rand.nextInt(size-1)+1;
       int weightInitial = rand.nextInt(upperbound-1)+1;
@@ -52,18 +52,20 @@ class entryGate{
     
     //create connection for each vertices that has not been connected to source, without needing to connect directly
     while(true){
-      Integer[] arrayNumbers = nodeAlrConnectedtoSource.toArray(new Integer[nodeAlrConnectedtoSource.size()]);
-      Integer[] arrayNumbers2 = nodeNotConenctedtoSource.toArray(new Integer[nodeNotConenctedtoSource.size()]);
-      int left_value = arrayNumbers[rand.nextInt(nodeAlrConnectedtoSource.size())];
-      int right_value = arrayNumbers2[rand.nextInt(nodeNotConenctedtoSource.size())];
+      int index_for_left = (int)(Math.random() * nodeAlrConnectedtoSource.size());
+      int index_for_right = (int)(Math.random() * nodeNotConenctedtoSource.size());
+      int right_value = nodeNotConenctedtoSource.get(index_for_right);
+      int left_value = nodeAlrConnectedtoSource.get(index_for_left);
+
       if(graph[left_value][right_value]==0 || left_value!=right_value){
         graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
+        nodeAlrConnectedtoSource.add(right_value);
+        nodeNotConenctedtoSource.remove(Integer.valueOf(right_value));
+        edges--;
         array[++sizeOfArray] = left_value;
         array[++sizeOfArray] = right_value;
-        nodeAlrConnectedtoSource.add(right_value);
-        edges--;
-        nodeNotConenctedtoSource.remove(right_value);
       }
+
       //termination case
       if(edges<=0 || nodeNotConenctedtoSource.size()==0) break;
     }
@@ -111,7 +113,7 @@ class entryGate{
         while(true){
           int first = array[++sizeOfArray];
           int second = array[++sizeOfArray];
-          int randtmp = rand.nextInt(20-1)+1;
+          int randtmp = rand.nextInt(10-1)+1;
           System.out.printf("adj_list.get(%d).add(new Node(%d,%d)", first, second, randtmp);
           System.out.println("");
             adj_list.get(first).add(new Node(second, randtmp)); 
@@ -119,6 +121,7 @@ class entryGate{
                 break;
             }
         }
+        
             
         // call Dijkstra's algo method  
         Graph_pq dpq = new Graph_pq(V); 
