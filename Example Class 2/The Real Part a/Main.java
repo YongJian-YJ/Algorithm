@@ -11,9 +11,9 @@ public class Main {
     { 
     System.out.println("Please enter the number of vertices: ");
     Scanner scan = new Scanner(System.in);
-    size = scan.nextInt();
+    size = scan.nextInt(); size++;
     System.out.println("Please enter the number of edges: ");
-    edges= scan.nextInt();
+    edges= scan.nextInt(); edges++;
     Random rand = new Random();
     int upperbound = 10;
     int graph[][] = new int[size][size];
