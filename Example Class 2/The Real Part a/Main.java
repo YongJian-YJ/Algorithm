@@ -14,6 +14,12 @@ public class Main {
     size = scan.nextInt();
     System.out.println("Please enter the number of edges: ");
     edges= scan.nextInt();
+    if(edges>=(size*size)-size){
+      int tmp = (size*size)-size;
+      System.out.println("The max number of edges is "+tmp);
+      System.out.println("Your edges is too large");
+      return;
+    }
     Random rand = new Random();
     int upperbound = 10;
     int graph[][] = new int[size][size];
