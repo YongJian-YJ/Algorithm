@@ -36,7 +36,7 @@ public class Main {
       for(int z=0; z<size; z++)
       {
         if(y!=z){
-          allNodes.add(String.valueOf(y)+","+String.valueOf(z));
+          allNodes.add(y+","+z);
         }
       }
     }
@@ -55,7 +55,7 @@ public class Main {
       int weightInitial = rand.nextInt(upperbound-1)+1;
       if(!h.contains(random)){
         graph[0][random]= weightInitial;
-        allNodes.remove(0+","+String.valueOf(random));
+        allNodes.remove(0+","+random);
         totalEdges++;
         h.add(random);
         nodeAlrConnectedtoSource.add(random);
@@ -78,7 +78,7 @@ public class Main {
 
       if(graph[left_value][right_value]==0 && left_value!=right_value){
         graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
-        allNodes.remove(String.valueOf(left_value)+","+String.valueOf(right_value));
+        allNodes.remove(left_value+","+right_value);
         totalEdges++;
         nodeAlrConnectedtoSource.add(right_value);
         nodeNotConenctedtoSource.remove(Integer.valueOf(right_value));
@@ -99,7 +99,7 @@ public class Main {
       if(graph[left_value][right_value]==0 && left_value!=right_value){
         graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
         totalEdges++;
-        allNodes.remove(String.valueOf(left_value)+","+String.valueOf(right_value));
+        allNodes.remove(left_value+","+right_value);
         edges--;
       }   
     }
