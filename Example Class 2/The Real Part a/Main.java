@@ -11,9 +11,9 @@ public class Main {
     { 
     System.out.println("Please enter the number of vertices: ");
     Scanner scan = new Scanner(System.in);
-    size = scan.nextInt(); size++;
+    size = scan.nextInt();
     System.out.println("Please enter the number of edges: ");
-    edges= scan.nextInt(); edges++;
+    edges= scan.nextInt();
     Random rand = new Random();
     int upperbound = 10;
     int graph[][] = new int[size][size];
@@ -22,6 +22,18 @@ public class Main {
     ArrayList<Integer> h = new ArrayList<Integer>();
     ArrayList<Integer> nodeAlrConnectedtoSource = new ArrayList<Integer> (); 
     ArrayList<Integer> nodeNotConenctedtoSource = new ArrayList<Integer> (); 
+    ArrayList<String> allNodes = new ArrayList<String> ();
+    int totalEdges = 0;
+    //initialize
+    for(int y=0; y<size; y++)
+    {
+      for(int z=0; z<size; z++)
+      {
+        if(y!=z){
+          allNodes.add(String.valueOf(y)+","+String.valueOf(z));
+        }
+      }
+    }
 
     
     //add all vertices to the nodeNotConnectedtoSource
@@ -37,6 +49,8 @@ public class Main {
       int weightInitial = rand.nextInt(upperbound-1)+1;
       if(!h.contains(random)){
         graph[0][random]= weightInitial;
+        allNodes.remove(0+","+String.valueOf(random));
+        totalEdges++;
         h.add(random);
         nodeAlrConnectedtoSource.add(random);
         nodeNotConenctedtoSource.remove(Integer.valueOf(random));
@@ -56,8 +70,10 @@ public class Main {
       int right_value = nodeNotConenctedtoSource.get(index_for_right);
       int left_value = nodeAlrConnectedtoSource.get(index_for_left);
 
-      if(graph[left_value][right_value]==0 || left_value!=right_value){
+      if(graph[left_value][right_value]==0 && left_value!=right_value){
         graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
+        allNodes.remove(String.valueOf(left_value)+","+String.valueOf(right_value));
+        totalEdges++;
         nodeAlrConnectedtoSource.add(right_value);
         nodeNotConenctedtoSource.remove(Integer.valueOf(right_value));
         edges--;
@@ -69,17 +85,21 @@ public class Main {
 
     //create random connection until edges is 0
     while(edges>0){
-      int left_value = rand.nextInt(size-1)+1;
-      int right_value = rand.nextInt(size-1)+1;
-
-      if(graph[left_value][right_value]==0 || left_value!=right_value){
+      int index = (int)(Math.random() * allNodes.size());
+      String str = allNodes.get(index);
+      int left_value = Integer.parseInt(str.substring( 0, str.indexOf(",")));
+      int right_value = Integer.parseInt(str.substring(str.indexOf(",")+1, str.length()));
+  
+      if(graph[left_value][right_value]==0 && left_value!=right_value){
         graph[left_value][right_value]=rand.nextInt(upperbound-1)+1;
+        totalEdges++;
+        allNodes.remove(String.valueOf(left_value)+","+String.valueOf(right_value));
         edges--;
       }   
     }
     
 
-    //System.out.println("Total edges: "+totalEdges);
+    System.out.println("Total edges: "+totalEdges);
 
     //System.out.println("AdditionalEdge: "+additionalEdge);
         System.out.println("The weighted value for each node: ");
