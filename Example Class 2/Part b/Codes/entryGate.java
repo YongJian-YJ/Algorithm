@@ -23,7 +23,7 @@ class entryGate{
     int upperbound = 10; 
     int graph[][] = new int[size][size];
     System.out.println("");
-    int[] array = new int[size*(size*(size+1))]; 
+    int[] array = new int[size*size*2]; 
     int sizeOfArray=-1;
 
     ArrayList<Integer> h = new ArrayList<Integer>();
