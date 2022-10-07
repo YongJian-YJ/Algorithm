@@ -8,13 +8,13 @@ class entryGate{
     static int size;
     static int edges;
     public static void main(String arg[]) throws IOException   {
-      for (size = 200; size <= 200; size++) {
+      for (size = 300; size <= 300; size++) {
         edges = ((size * size) - size); 
 
     /*
      Scanner sc = new Scanner(System.in);
     //Generate Matrix from line 9 to line 26
-    System.out.println("Please enter the number of vertices: ");
+    System.out.println("Please enter the nmuber of vertices: ");
     Scanner scan = new Scanner(System.in);
     size = scan.nextInt();
     System.out.println("Please enter the number fo edges: ");
@@ -140,6 +140,7 @@ class entryGate{
         } 
         
         
+        long start = System.nanoTime();
         // Input graph edges 
         sizeOfArray = -1;
         while(true){
@@ -155,7 +156,7 @@ class entryGate{
         }
         
         //System.out.println("Total edges: " + totalEdges);
-      long start = System.nanoTime();
+      
         // call Dijkstra's algo method  
         Graph_pq dpq = new Graph_pq(V); 
         dpq.algo_dijkstra(adj_list, source); 

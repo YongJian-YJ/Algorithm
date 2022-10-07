@@ -15,7 +15,7 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     for (size = 4; size <= 400; size++) {
-      edges = ((size * size) - size) / 4;
+      edges = ((size * size) - size);
       // System.out.println("Please enter the number of vertices: ");
       // Scanner scan = new Scanner(System.in);
       // size = scan.nextInt();
@@ -51,6 +51,7 @@ public class Main {
         nodeNotConenctedtoSource.add(ui);
       }
 
+      long start = System.nanoTime();
       // from line 33 to 77
       // create connection for first row of matrix - worst case is having only 1 edge
       // connected directly to source
@@ -109,7 +110,7 @@ public class Main {
       }
 
       System.out.println("Total edges: " + totalEdges);
-      long start = System.nanoTime();
+      
       Array_Shortest_Path g = new Array_Shortest_Path();
       g.algo_dijkstra(graph, 0);
       long end = System.nanoTime();
