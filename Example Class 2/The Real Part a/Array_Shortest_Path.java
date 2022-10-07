@@ -14,6 +14,7 @@ public class Array_Shortest_Path extends Main {
         }
         return min_index; 
     }
+    /*
      // print the array of distances (path_array)
         void printMinpath(int path_array[],int pi[])   { 
         	
@@ -35,7 +36,7 @@ public class Array_Shortest_Path extends Main {
             	System.out.println();
             }
         }
-        
+        */
         
         
     // Implementation of Dijkstra's algorithm for graph (adjacency matrix) 
@@ -73,7 +74,7 @@ public class Array_Shortest_Path extends Main {
             } 
        
             // print the path array 
-            printMinpath(path_array,pi); 
+            //printMinpath(path_array,pi); 
             
         } 
 }

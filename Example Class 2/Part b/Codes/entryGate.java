@@ -175,13 +175,13 @@ class entryGate{
       fileWriter.append(size + "," + totalEdges + "," + elapsedTime + "," + elapsedTimeInSecond);
       fileWriter.close();
    
-        
+        /*
         // Print the shortest path from source node to all the nodes 
         System.out.println("The shorted path from source node("+source+") to other nodes:"); 
         System.out.println("Node\t\t" + "Predecessor\t\t" + "Distance");
         for (int i = 0; i < dpq.dist.length; i++) 
             System.out.println(" " + i + " \t\t     "  + dpq.pi[i]+ " \t\t\t   "  + dpq.dist[i]);
-         
+         */
       }
     } 
 } 
