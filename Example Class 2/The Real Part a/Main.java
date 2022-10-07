@@ -14,7 +14,7 @@ public class Main {
   static int edges;
 
   public static void main(String[] args) throws IOException {
-    for (size = 4; size <= 400; size++) {
+    for (size = 4; size <= 200; size++) {
       edges = ((size * size) - size);
       // System.out.println("Please enter the number of vertices: ");
       // Scanner scan = new Scanner(System.in);
@@ -126,14 +126,14 @@ public class Main {
       // }
       // System.out.println();
       // }
-      File csvFile = new File("TimeanalysisPartialGraphDifferent|V|.csv");
+      File csvFile = new File("Test1.csv");
       FileWriter fileWriter = new FileWriter(csvFile, true);
       // fileWriter.append("Number of vertices" + "," + "Number of edges" + "," +
       // "Time in nanoseconds" + "," + "Time in seconds");
       fileWriter.append((System.getProperty("line.separator")));
       fileWriter.append(size + "," + totalEdges + "," + elapsedTime + "," + elapsedTimeInSecond);
       fileWriter.close();
-      // scan.close();
+      //scan.close();
     }
     // //System.out.println("AdditionalEdge: "+additionalEdge);
     // System.out.println("The weighted value for each node: ");
