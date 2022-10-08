@@ -6,10 +6,12 @@ import java.io.IOException; // Import the IOException class to handle errors
 class entryGate {
   static int size;
   static int edges;
+  static int count;
 
   public static void main(String arg[]) throws IOException {
-    for (size = 4; size <= 300; size++) {
-      edges = size - 1;
+    for (size = 4; size <= 170; size++) {
+      edges = (size*size)-size;
+      count=0;
 
       /*
        * Scanner sc = new Scanner(System.in);
@@ -145,6 +147,7 @@ class entryGate {
         int first = array[++sizeOfArray];
         int second = array[++sizeOfArray];
         int randtmp = rand.nextInt(10 - 1) + 1;
+
         // System.out.printf("adj_list.get(%d).add(new Node(%d,%d)", first, second,
         // randtmp);
         // System.out.println("");
@@ -165,12 +168,13 @@ class entryGate {
       System.out.println("In nanoseconds : " + elapsedTime);
       double elapsedTimeInSecond = (double) elapsedTime / 1000000000;
       System.out.println("In seconds: " + elapsedTimeInSecond);
-      File csvFile = new File("TimeanalysisOneGraphDifferent|V|.csv");
+      System.out.println("Number of counts: "+count);
+      File csvFile = new File("partb.csv");
       FileWriter fileWriter = new FileWriter(csvFile, true);
       // fileWriter.append("Number of vertices" + "," + "Number of edges" + "," +
       // "Time in nanoseconds" + "," + "Time in seconds");
       fileWriter.append((System.getProperty("line.separator")));
-      fileWriter.append(size + "," + totalEdges + "," + elapsedTime + "," + elapsedTimeInSecond);
+      fileWriter.append(size + "," + totalEdges + "," + elapsedTime + "," + elapsedTimeInSecond + "," + count);
       fileWriter.close();
 
       /*

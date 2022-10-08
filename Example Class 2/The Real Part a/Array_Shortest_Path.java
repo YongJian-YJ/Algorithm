@@ -8,6 +8,7 @@ public class Array_Shortest_Path extends Main {
         int min = Integer.MAX_VALUE, min_index = -1; 
         for (int v = 0; v < num_Vertices; v++) {
             if (S[v] == false && path_array[v] <= min) { 
+                count++;
                 min = path_array[v]; 
                 min_index = v; 
             } 
@@ -36,12 +37,13 @@ public class Array_Shortest_Path extends Main {
             	System.out.println();
             }
         }
-        */
+    */
         
         
     // Implementation of Dijkstra's algorithm for graph (adjacency matrix) 
         void algo_dijkstra(int graph[][], int src_node)  { 
             int path_array[] = new int[num_Vertices]; // The output array. dist[i] will hold 
+
             // the shortest distance from src to i 
        
             // spt (shortest path set) contains vertices that have shortest path 
@@ -56,21 +58,23 @@ public class Array_Shortest_Path extends Main {
             // Path between vertex and itself is always 0 
             path_array[src_node] = 0; 
        // now find shortest path for all vertices  
-            for (int count = 0; count < num_Vertices - 1; count++) { 
+            for (int counter = 0; counter < num_Vertices - 1; counter++) { 
+                count++;
                 // call minDistance method to find the vertex with min distance
                 int u = minDistance(path_array, S); 
                   // the current vertex u is processed
                 S[u] = true; 
                   // process adjacent nodes of the current vertex
-                for (int v = 0; v < num_Vertices; v++) 
-       
+                for (int v = 0; v < num_Vertices; v++) {
                     // if vertex v not in S then update it  
                     if (!S[v] && graph[u][v] != 0 && path_array[u] != 
                                 Integer.MAX_VALUE && path_array[u] 
                                 + graph[u][v] < path_array[v]) {
+                                    count++;
                                 path_array[v] = path_array[u] + graph[u][v]; 
                 				pi[v]=u;
                     }
+                }
             } 
        
             // print the path array 
