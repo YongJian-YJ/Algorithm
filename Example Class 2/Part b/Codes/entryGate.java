@@ -9,8 +9,9 @@ class entryGate {
   static int count;
 
   public static void main(String arg[]) throws IOException {
-    for (size = 4; size <= 300; size++) {
-      edges = (size);
+    size = 100;
+    for (int n = 1; n <= (((size * size) - size) - (size - 1)); n = n + 100) {
+      edges = (size - 1) + n;
       count = 0;
 
       /*
@@ -169,7 +170,7 @@ class entryGate {
       double elapsedTimeInSecond = (double) elapsedTime / 1000000000;
       System.out.println("In seconds: " + elapsedTimeInSecond);
       System.out.println("Number of counts: " + count);
-      File csvFile = new File("BTimeanalysisOneGraphDifferent|V|.csv");
+      File csvFile = new File("BTimeanalysisFullGraphDifferent|E|.csv");
       FileWriter fileWriter = new FileWriter(csvFile, true);
       // fileWriter.append("Number of vertices" + "," + "Number of edges" + "," +
       // "Time in nanoseconds" + "," + "Time in seconds");
