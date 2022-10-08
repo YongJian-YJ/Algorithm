@@ -15,8 +15,9 @@ public class Main {
   static int count;
 
   public static void main(String[] args) throws IOException {
-    for (size = 4; size <= 300; size++) {
-      edges = (size - 1);
+    size = 100;
+    for (int n = 1; n <= (((size * size) - size) - (size - 1)); n = n + 100) {
+      edges = (size - 1) + n;
       count = 0; // 64, 86, 108 ,another file:11,
       // System.out.println("Please enter the number of vertices: ");
       // Scanner scan = new Scanner(System.in);
@@ -125,24 +126,26 @@ public class Main {
       System.out.println("In nanoseconds : " + elapsedTime);
       double elapsedTimeInSecond = (double) elapsedTime / 1000000000;
       System.out.println("In seconds: " + elapsedTimeInSecond);
-      /*
-       * System.out.println("The weighted value for each node: ");
-       * for (int i = 0; i < size; i++) {
-       * for (int j = 0; j < size; j++) {
-       * System.out.print(graph[i][j] + " ");
-       * }
-       * System.out.println();
-       * }
-       */
+
+      // System.out.println("The weighted value for each node: ");
+      // for (int i = 0; i < size; i++) {
+      // for (int j = 0; j < size; j++) {
+      // System.out.print(graph[i][j] + " ");
+      // }
+      // System.out.println();
+      // }
+
       System.out.println("Number of count: " + count);
-      File csvFile = new File("TimeanalysisOneGraphDifferent|V|.csv");
+      File csvFile = new File("TimeanalysisFullGraphDifferent|E|.csv");
       FileWriter fileWriter = new FileWriter(csvFile, true);
       // fileWriter.append("Number of vertices" + "," + "Number of edges" + "," +
       // "Time in nanoseconds" + "," + "Time in seconds");
       fileWriter.append((System.getProperty("line.separator")));
-      fileWriter.append(size + "," + totalEdges + "," + elapsedTime + "," + elapsedTimeInSecond + "," + count);
+      fileWriter.append(
+          size + "," + totalEdges + "," + elapsedTime + "," + elapsedTimeInSecond + "," + count);
       fileWriter.close();
       // scan.close();
+
     }
     // //System.out.println("AdditionalEdge: "+additionalEdge);
     // System.out.println("The weighted value for each node: ");
