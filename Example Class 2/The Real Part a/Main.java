@@ -16,8 +16,8 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     for (size = 4; size <= 300; size++) {
-      edges = (size*size)-size;
-      count = 0; //64, 86, 108 ,another file:11, 
+      edges = (size - 1);
+      count = 0; // 64, 86, 108 ,another file:11,
       // System.out.println("Please enter the number of vertices: ");
       // Scanner scan = new Scanner(System.in);
       // size = scan.nextInt();
@@ -63,7 +63,7 @@ public class Main {
         int random = rand.nextInt(size - 1) + 1;
         int weightInitial = rand.nextInt(upperbound - 1) + 1;
         if (!h.contains(random)) {
-          
+
           graph[0][random] = weightInitial;
           allNodes.remove(0 + "," + random);
           totalEdges++;
@@ -85,7 +85,7 @@ public class Main {
         int left_value = nodeAlrConnectedtoSource.get(index_for_left);
 
         if (graph[left_value][right_value] == 0 && left_value != right_value) {
-          
+
           graph[left_value][right_value] = rand.nextInt(upperbound - 1) + 1;
           allNodes.remove(left_value + "," + right_value);
           totalEdges++;
@@ -107,7 +107,7 @@ public class Main {
         int right_value = Integer.parseInt(str.substring(str.indexOf(",") + 1, str.length()));
 
         if (graph[left_value][right_value] == 0 && left_value != right_value) {
-          
+
           graph[left_value][right_value] = rand.nextInt(upperbound - 1) + 1;
           totalEdges++;
           allNodes.remove(left_value + "," + right_value);
@@ -121,21 +121,21 @@ public class Main {
       g.algo_dijkstra(graph, 0);
       long end = System.nanoTime();
       long elapsedTime = end - start;
-      System.out.println("Number of vertices: "+size);
+      System.out.println("Number of vertices: " + size);
       System.out.println("In nanoseconds : " + elapsedTime);
       double elapsedTimeInSecond = (double) elapsedTime / 1000000000;
       System.out.println("In seconds: " + elapsedTimeInSecond);
-/*
-       System.out.println("The weighted value for each node: ");
-       for (int i = 0; i < size; i++) {
-       for (int j = 0; j < size; j++) {
-       System.out.print(graph[i][j] + " ");
-       }
-       System.out.println();
-       }
+      /*
+       * System.out.println("The weighted value for each node: ");
+       * for (int i = 0; i < size; i++) {
+       * for (int j = 0; j < size; j++) {
+       * System.out.print(graph[i][j] + " ");
+       * }
+       * System.out.println();
+       * }
        */
-       System.out.println("Number of count: "+ count);
-      File csvFile = new File("Test.csv");
+      System.out.println("Number of count: " + count);
+      File csvFile = new File("TimeanalysisOneGraphDifferent|V|.csv");
       FileWriter fileWriter = new FileWriter(csvFile, true);
       // fileWriter.append("Number of vertices" + "," + "Number of edges" + "," +
       // "Time in nanoseconds" + "," + "Time in seconds");
