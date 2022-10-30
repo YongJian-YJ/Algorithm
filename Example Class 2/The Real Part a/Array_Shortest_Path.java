@@ -57,6 +57,8 @@ public class Array_Shortest_Path extends Main {
         // Path between vertex and itself is always 0
         path_array[src_node] = 0;
         // now find shortest path for all vertices
+        //the first for loop is to loop through the x axis of the matrix
+        //the second for loop is to loop through the y axis of the matrix
         for (int counter = 0; counter < num_Vertices - 1; counter++) {
             count++;
             // call minDistance method to find the vertex with min distance
