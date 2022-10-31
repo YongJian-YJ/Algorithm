@@ -41,19 +41,16 @@ def printknapSack(W, wt, val, n):
             res = res - val[i - 1]
             w = w - wt[i - 1]
 
-
-	
-
-
-
 # Driver code
 val = [7, 6, 9]
 wt = [4, 6, 8]
 W = 14
 n = len(val)
 
+val2 = [7 ,6 ,9]
+wt2 = [5 ,6 , 8]
 
 printknapSack(W, wt, val, n)
-
+printknapSack(W, wt2, val2, n)
 
 # This code is contributed by Aryan Garg.
