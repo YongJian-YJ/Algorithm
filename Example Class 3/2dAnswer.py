@@ -18,16 +18,25 @@ def printknapSack(W, wt, val, n):
             print(K[w][i],end=" ")
         print()
     
+  
+
     # stores object taken
     i=W
     j=n
+    idxes_list = []
     while(i>0 and j>0):
-        if(K[i][j]!=K[i][j-1]):
-            print("item",j,"is taken")
+        if(j>0 and K[i][j]!=K[i][j-1]):
+            idxes_list.append(j)
             i=i-wt[j-1]
-            j=j-1
+        elif(j==0 and i>wt[j]):
+            idxes_list.append(j)
+            i=i-wt[j-1]
         else:
             j=j-1
+    
+    print("Total item taken is:")
+    print(*idxes_list)  
+  
 
 
 # Driver code
