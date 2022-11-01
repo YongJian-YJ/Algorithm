@@ -1,60 +1,25 @@
-def printknapSack(W, wt, val, n):
-    K = [[0 for i in range(n + 1)]
-            for w in range(W + 1)]
-			
-	# Build table K[][] in bottom up manner
-    for w in range(W + 1):
-        for i in range(n + 1):
-            if i == 0 or w == 0:
-                K[w][i] = 0
-            elif wt[i-1] <= w:
-                K[w][i] = max(val[i - 1]+ K[w - wt[i-1]][i], K[w][i-1])               
-            else:
-                K[w][i] = K[w][i-1]
-
-    #print k table
-    for w in range(W + 1):
-        for i in range(n + 1):
-            print(K[w][i],end=" ")
-        print()
+def unboundedKnapSack(W, wt, val, n):
+   
+   # code here
+   dp_table = [[0 for j in range(W+1)]for i in range(len(wt)+1)]
+   for i in range(1,len(dp_table)):
+      for j in range(1, len(dp_table[0])):
+          if wt[i-1] <= j:
+             dp_table[i][j] = max(val[i-1]+dp_table[i][j-wt[i-1]],dp_table[i-1][j])
+          elif wt[i-1] > j:
+             dp_table[i][j] = dp_table[i-1][j]
     
-
-	#stores the result of Knapsack
-    res = K[W][n]
-    print ()
-    print("Max profit is:", res)      #max profit
-	
-    print("Objects to be selected are:")
-
-    w = W   #capacity
-    for i in range(n, 0, -1):
-        if res <= 0:
-            break
-
-        if res == K[W][i-1]:
-            continue
-        else:
-
-            print("Object",i)    #weight of item
-			
-            res = res - val[i - 1]
-            w = w - wt[i - 1]
-
-
-# Driver code
+   # print table
+   print("Table as follows:")
+   for i in range(len(dp_table)):
+        print(dp_table[i])
+   print ()
+   return dp_table[-1][-1]
+ 
+# Driver program
+W = 14
 val = [7, 6, 9]
 wt = [4, 6, 8]
-W = 14
 n = len(val)
-
-val2 = [7 ,6 ,9]
-wt2 = [5 ,6 , 8]
-
-print ("Section 3: ")
-printknapSack(W, wt, val, n)
-
-print()
-print()
-
-print ("Section 4: ")
-printknapSack(W, wt2, val2, n)
+ 
+print(unboundedKnapSack(W, wt, val, n))
