@@ -17,8 +17,7 @@ def printknapSack(W, wt, val, n):
         for i in range(n + 1):
             print(K[w][i],end=" ")
         print()
-    
-  
+
 
     # stores object taken
     i=W
@@ -34,8 +33,9 @@ def printknapSack(W, wt, val, n):
         else:
             j=j-1
     
-    print("Total item taken is:")
-    print(*idxes_list)  
+    print ("\nHighest possible profit is: ", K[W][n], " and the objects to be taken are: ", *idxes_list)
+    
+    
   
 
 
@@ -48,11 +48,11 @@ n = len(val)
 val2 = [7 ,6 ,9]
 wt2 = [5 ,6 , 8]
 
-print ("Section 3: ")
+print ("Question 3: ")
 printknapSack(W, wt, val, n)
 
 print()
 print()
 
-print ("Section 4: ")
+print ("Question 4: ")
 printknapSack(W, wt2, val2, n)
